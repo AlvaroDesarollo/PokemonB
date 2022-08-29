@@ -14,6 +14,7 @@ export class ConfigService implements IConfig {
   public load = () => {
     const envVarsSchema = joi
       .object({
+        LIMIT_POKEMON: joi.string().default(12),
         NODE_ENV: joi
           .string()
           .valid('development', 'testing', 'production')
@@ -22,6 +23,7 @@ export class ConfigService implements IConfig {
         // HTTP Server
         PORT: joi.number().default(8080),
         ROOT_PATH: joi.string().required(),
+        URL_POKEMON: joi.string().required(),
       })
       .unknown()
       .required()
@@ -32,6 +34,10 @@ export class ConfigService implements IConfig {
       return `Config validation error: ${error.message}`
     }
     this.vars = {
+      back: {
+        limitPokemon: envVars.LIMIT_POKEMON,
+        urlGetPokemon: envVars.URL_POKEMON
+      },
       env: envVars.NODE_ENV,
       isDev: envVars.NODE_ENV === 'development',
       isProd: envVars.NODE_ENV === 'production',

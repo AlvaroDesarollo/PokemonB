@@ -1,3 +1,5 @@
 NODE_ENV=development
 PORT=5020
 ROOT_PATH=/pokemon/v1
+URL_POKEMON = https://pokeapi.co/api/v2/pokemon
+LIMIT_POKEMON = 20
